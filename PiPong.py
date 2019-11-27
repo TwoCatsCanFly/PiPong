@@ -1,4 +1,7 @@
 import turtle
+import random
+#Window size
+#import winsound
 
 wn = turtle.Screen()
 wn.title("PiPong")
@@ -36,9 +39,10 @@ ball.shape('square')
 ball.color("white")
 ball.penup()
 ball.goto(0, 0)
-
 ball.dx = 0.3
 ball.dy = 0.3
+s_var_1 = 0.1
+s_var_2 = 0
 
 # Pen
 
@@ -90,11 +94,19 @@ while True:
 
     #Border
     if ball.xcor()> 290:
+        rnd = random.uniform(s_var_1,s_var_2)
         ball.setx(290)
+        ball.dx +=rnd
         ball.dx *= -1
+        ball.dy +=(s_var_1-rnd)
+        #winsound.PlaySound('bounce.wav',winsound.SND_ASYNC)
     if ball.xcor()< -290:
+        rnd = random.uniform(s_var_1,s_var_2)
         ball.setx(-290)
+        ball.dx +=rnd
         ball.dx *= -1
+        ball.dy +=(s_var_1-rnd)
+        #winsound.PlaySound('bounce.wav', winsound.SND_ASYNC)
 
     if ball.ycor()>390:
         ball.goto(0,0)
@@ -113,7 +125,13 @@ while True:
     # paddle and ball collisions
     if ball.ycor() >340 and ball.ycor() < 350  and ball.xcor() < paddle_b.xcor() +40 and ball.xcor() > paddle_b.xcor() -40:
         ball.sety(340)
+        rnd = random.uniform(s_var_1,s_var_2)
+        ball.dy +=rnd
         ball.dy *=-1
+        ball.dx +=(s_var_1-rnd)
     if ball.ycor()<-340 and ball.ycor()>-350  and ball.xcor() < paddle_a.xcor() +40 and ball.xcor() > paddle_a.xcor() -40:
         ball.sety(-340)
+        rnd = random.uniform(s_var_1,s_var_2)
+        ball.dy +=rnd
         ball.dy *=-1
+        ball.dx +=(s_var_1-rnd)
